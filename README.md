@@ -1,5 +1,5 @@
 
-# ![](images/icons/windows-update-32x32.png) [98.js](https://98.js.org)
+# ![](images/icons/windows-update-32x32.png) [98.js](/https://win98.saursvepur.xyz)
 
 [![Discord](https://img.shields.io/discord/1141194608525713478)](https://discord.com/invite/SyFweYjTKx)
 [![GitHub Repo stars](https://img.shields.io/github/stars/1j01/98)](https://github.com/1j01/98/stargazers)
@@ -31,7 +31,7 @@ Features:
 
 ## Try it out
 
-[ ＥＮＴＥＲ　![](images/icons/windows-update-16x16.png)　ＷＩＮＤＯＷＳ　９８　体験へようこそ](https://98.js.org/)
+[ ＥＮＴＥＲ　![](images/icons/windows-update-16x16.png)　ＷＩＮＤＯＷＳ　９８ (https://win98.saursvepur.xyz/)
 
 [![](images/3d.jpg)](https://98.js.org/)
 
