@@ -375,11 +375,10 @@ async function render_folder_template(folder_view, address, eventHandlers) {
 	let html = htt.replaceAll(percent_var_regexp, (match, file_protocol, path_before, var_name, path_after) => {
 		if (var_name in percent_vars) {
 			return (
-                (file_protocol ?? "") +
                 (path_before ?? "").replace(/\\/g, "/") +
-                escapeHtml(percent_vars[var_name]) + 
-                (path_after ?? "").replace(/\\/g, "/")
-            );
+				escapeHtml(percent_vars[var_name]) +
+				(path_after ?? "").replace(/\\/g, "/")
+			);
 		} else {
 			console.warn("Unknown percent variable:", match);
 			return match;

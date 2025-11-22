@@ -1297,7 +1297,7 @@ add_icon_not_via_filesystem({
 add_icon_not_via_filesystem({
 	title: "Корзина",
 	iconID: "recycle-bin",
-	open: function () { Explorer("https://www.epa.gov/recycle/"); },
+	//open: function () { Explorer("https://www.epa.gov/recycle/"); },
 	is_system_folder: true,
 });
 add_icon_not_via_filesystem({
