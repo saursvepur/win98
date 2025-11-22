@@ -419,6 +419,68 @@ function Solitaire() {
 	return new Task($win);
 }
 
+window.addEventListener('load', function() {
+        if (!sessionStorage.getItem('win98_startup_played')) {
+            
+            var audio = new Audio('/sound/windows-98-startup.mp3');
+            
+            var playPromise = audio.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(function() {
+                    sessionStorage.setItem('win98_startup_played', 'true');
+                }).catch(function(error) {
+                    
+                    var playOnInteraction = function() {
+                        audio.play();
+                        sessionStorage.setItem('win98_startup_played', 'true');
+                        document.removeEventListener('click', playOnInteraction);
+                        document.removeEventListener('keydown', playOnInteraction);
+                    };
+
+                    document.addEventListener('click', playOnInteraction);
+                    document.addEventListener('keydown', playOnInteraction);
+                });
+            }
+        }
+    });
+	window.addEventListener("resize", ()=> {
+				document.getElementById("disabled-inset-filter").setAttribute("x", "0");
+			});
+
+			function ShutDown() {
+    document.body.innerHTML = "";
+    document.body.style.backgroundColor = "black";
+    document.body.style.margin = "0";
+    document.body.style.height = "100vh";
+    document.body.style.width = "100vw";
+    document.body.style.overflow = "hidden";
+
+    document.body.style.display = "flex";
+    document.body.style.flexDirection = "column";
+    document.body.style.justifyContent = "center";
+    document.body.style.alignItems = "center";
+
+    const container = document.createElement('div');
+    container.style.textAlign = "center";
+    
+    container.style.fontFamily = "'Arial Narrow', 'Arial', sans-serif";
+    container.style.fontWeight = "bold"; 
+    container.style.fontSize = "46px";   
+    container.style.lineHeight = "1.3"; 
+    
+    container.style.color = "#ff4e18"; 
+    container.style.transform = "scaleY(1.05)"; 
+
+    container.innerHTML = "Теперь питание компьютера<br>можно отключить";
+    
+    document.body.appendChild(container);
+
+    setTimeout(function() {
+        window.location.href = "http://home.saursvepur.xyz";
+    }, 4000);
+}
+
 function showScreensaver(iframeSrc) {
 	const mouseDistanceToExit = 15;
 	const $iframe = $("<iframe>").attr("src", iframeSrc);
@@ -493,6 +555,18 @@ function Pipes() {
 
 function FlowerBox() {
 	showScreensaver("programs/3D-FlowerBox/index.html");
+}
+
+function escapeHtml(text) {
+    if (!text) return text;
+    const str = String(text); 
+    
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 function CommandPrompt() {
@@ -726,241 +800,263 @@ function openWinamp(file_path) {
 	const includeButterchurn = isButterchurnSupported();
 
 	load_winamp_bundle_if_not_loaded(includeButterchurn, function () {
-		const webamp_options = {
-			initialTracks: [{
-				metaData: {
-					artist: "DJ Mike Llama",
-					title: "Llama Whippin' Intro",
-				},
-				url: "programs/winamp/mp3/llama-2.91.mp3",
-				duration: 5.322286,
-			}],
-			// initialSkin: {
-			// 	url: "programs/winamp/skins/base-2.91.wsz",
-			// },
-			enableHotkeys: true,
-			handleTrackDropEvent: (event) =>
-				Promise.all(
-					dragging_file_paths.map(filePathToTrack)
-				),
-			// TODO: filePickers
-		};
-		if (includeButterchurn) {
-			webamp_options.__butterchurnOptions = {
-				importButterchurn: () => Promise.resolve(window.butterchurn),
-				getPresets: () => {
-					const presets = window.butterchurnPresets.getPresets();
-					return Object.keys(presets).map((name) => {
-						return {
-							name,
-							butterchurnPresetObject: presets[name]
-						};
-					});
-				},
-				butterchurnOpen: true,
-			};
-			webamp_options.__initialWindowLayout = {
-				main: { position: { x: 0, y: 0 } },
-				equalizer: { position: { x: 0, y: 116 } },
-				playlist: { position: { x: 0, y: 232 }, size: [0, 4] },
-				milkdrop: { position: { x: 275, y: 0 }, size: [7, 12] }
-			};
-		}
-		webamp = new Webamp(webamp_options);
 
-		var visual_container = document.createElement("div");
-		visual_container.classList.add("webamp-visual-container");
-		visual_container.style.position = "absolute";
-		visual_container.style.left = "0";
-		visual_container.style.right = "0";
-		visual_container.style.top = "0";
-		visual_container.style.bottom = "0";
-		visual_container.style.pointerEvents = "none";
-		document.body.appendChild(visual_container);
-		// Render after the skin has loaded.
-		webamp.renderWhenReady(visual_container).then(() => {
-			window.console && console.log("Webamp rendered");
+		fetch("https://oldmusic.saursvepur.xyz/playlist.json")
+			.then(resp => resp.json())
+			.then(playlistData => {
 
-			$webamp = $("#webamp");
-			// Bring window to front, initially and when clicked
-			$webamp.css({
-				position: "absolute",
-				left: 0,
-				top: 0,
-				zIndex: $Window.Z_INDEX++
-			});
-
-			const $eventTarget = $({});
-			const makeSimpleListenable = (name) => {
-				return (callback) => {
-					const fn = () => {
-						callback();
+				const myTracks = playlistData.map(track => {
+					return {
+						metaData: track.metaData,
+						url: track.url,
+						duration: track.duration
 					};
-					$eventTarget.on(name, fn);
-					const dispose = () => {
-						$eventTarget.off(name, fn);
-					};
-					return dispose;
+				});
+
+				const webamp_options = {
+					initialTracks: myTracks,
+					enableHotkeys: false,
+					handleTrackDropEvent: (event) =>
+						Promise.all(
+							dragging_file_paths.map(filePathToTrack)
+						),
 				};
-			};
 
-			winamp_interface = {};
-			winamp_interface.onFocus = makeSimpleListenable("focus");
-			winamp_interface.onBlur = makeSimpleListenable("blur");
-			winamp_interface.onClosed = makeSimpleListenable("closed");
-			winamp_interface.getIconAtSize = (target_icon_size) => {
-				if (target_icon_size !== 32 && target_icon_size !== 16) {
-					target_icon_size = 32;
+				if (includeButterchurn) {
+					webamp_options.__butterchurnOptions = {
+						importButterchurn: () => Promise.resolve(window.butterchurn),
+						getPresets: () => {
+							const presets = window.butterchurnPresets.getPresets();
+							return Object.keys(presets).map((name) => {
+								return {
+									name,
+									butterchurnPresetObject: presets[name]
+								};
+							});
+						},
+						butterchurnOpen: false,
+					};
+					webamp_options.__initialWindowLayout = {
+						main: { position: { x: 0, y: 0 } },
+						equalizer: { position: { x: 0, y: 116 } },
+						playlist: { position: { x: 0, y: 232 }, size: [0, 4] },
+					    milkdrop: { position: { x: 275, y: 0 }, size: [7, 12] }
+					};
 				}
-				const img = document.createElement("img");
-				img.src = getIconPath("winamp2", target_icon_size);
-				return img;
-			};
-			winamp_interface.bringToFront = () => {
-				$webamp.css({
-					zIndex: $Window.Z_INDEX++
+
+				webamp = new Webamp(webamp_options);
+
+				var visual_container = document.createElement("div");
+				visual_container.classList.add("webamp-visual-container");
+				visual_container.style.position = "absolute";
+				visual_container.style.left = "0";
+				visual_container.style.right = "0";
+				visual_container.style.top = "0";
+				visual_container.style.bottom = "0";
+				visual_container.style.pointerEvents = "none";
+				document.body.appendChild(visual_container);
+				
+				webamp.renderWhenReady(visual_container).then(() => {
+					window.console && console.log("Webamp запущен");
+
+					$webamp = $("#webamp");
+					$webamp.css({
+						position: "absolute",
+						left: 0,
+						top: 0,
+						zIndex: $Window.Z_INDEX++
+					});
+
+					const $eventTarget = $({});
+					const makeSimpleListenable = (name) => {
+						return (callback) => {
+							const fn = () => {
+								callback();
+							};
+							$eventTarget.on(name, fn);
+							const dispose = () => {
+								$eventTarget.off(name, fn);
+							};
+							return dispose;
+						};
+					};
+
+					winamp_interface = {};
+					winamp_interface.onFocus = makeSimpleListenable("focus");
+					winamp_interface.onBlur = makeSimpleListenable("blur");
+					winamp_interface.onClosed = makeSimpleListenable("closed");
+					winamp_interface.getIconAtSize = (target_icon_size) => {
+						if (target_icon_size !== 32 && target_icon_size !== 16) {
+							target_icon_size = 32;
+						}
+						const img = document.createElement("img");
+						img.src = getIconPath("winamp2", target_icon_size);
+						return img;
+					};
+					winamp_interface.bringToFront = () => {
+						$webamp.css({
+							zIndex: $Window.Z_INDEX++
+						});
+					};
+					winamp_interface.element = winamp_interface[0] = $webamp[0]; // for checking z-index in window switcher
+					winamp_interface.hasClass = (className) => { // also for window switcher (@TODO: clean this stuff up)
+						if (className === "focused") {
+							return $webamp.hasClass("focused");
+						}
+						return false;
+					};
+					winamp_interface.focus = () => {
+						if (!$webamp.hasClass("focused")) {
+							$webamp.addClass("focused");
+							winamp_interface.bringToFront();
+							$eventTarget.triggerHandler("focus");
+							// @TODO: focus last focused window/control?
+							$webamp.find("#main-window [tabindex='-1']").focus();
+						}
+					};
+					winamp_interface.blur = () => {
+						if ($webamp.hasClass("focused")) {
+							$webamp.removeClass("focused");
+							$eventTarget.triggerHandler("blur");
+							// TODO: really blur
+						}
+					};
+					winamp_interface.minimize = () => {
+						// TODO: are these actually useful or does webamp hide it?
+						$webamp.hide();
+					};
+					winamp_interface.unminimize = () => {
+						// more to the point does this work necessarily??
+						$webamp.show();
+						// $webamp.focus();
+					};
+					winamp_interface.close = () => {
+						// not allowing canceling close event in this case (generally used *by* an application (for "Save changes?"), not outside of it)
+						// TODO: probably something like winamp_task.close()
+						// winamp_interface.triggerHandler("close");
+						// winamp_interface.triggerHandler("closed");
+						webamp.dispose();
+						$webamp.remove();
+
+						$eventTarget.triggerHandler("closed");
+
+						webamp = null;
+						$webamp = null;
+						winamp_task = null;
+						winamp_interface = null;
+					};
+					winamp_interface.getTitle = () => {
+						let taskTitle = "Winamp 2.91";
+						const $cell = $webamp.find(".playlist-track-titles .track-cell.current");
+						if ($cell.length) {
+							taskTitle = `${$cell.text()} - Winamp`;
+							switch (webamp.getMediaStatus()) {
+								case "STOPPED":
+									taskTitle = `${taskTitle} [Stopped]`
+									break;
+								case "PAUSED":
+									taskTitle = `${taskTitle} [Paused]`
+									break;
+							}
+						}
+						return taskTitle;
+					};
+					winamp_interface.setMinimizeTarget = () => {
+					};
+					winamp_interface.on = (event_name, callback) => {
+						if (event_name === "title-change") {
+							webamp.onTrackDidChange(callback);
+						} else if (event_name === "icon-change") {
+						} else {
+							console.warn(`Unsupported event: ${event_name}`);
+						}
+					};
+
+					mustHaveMethods(winamp_interface, windowInterfaceMethods);
+
+					let raf_id;
+					let global_pointerdown;
+
+					winamp_task = new Task(winamp_interface);
+					webamp.onClose(function () {
+						winamp_interface.close();
+						cancelAnimationFrame(raf_id);
+						visualizerOverlay.fadeOutAndCleanUp();
+					});
+					webamp.onMinimize(function () {
+						winamp_interface.minimize();
+					});
+
+					$webamp.on("focusin", () => {
+						winamp_interface.focus();
+					});
+					$webamp.on("focusout", () => {
+						if (
+							!document.activeElement ||
+							!document.activeElement.closest ||
+							!document.activeElement.closest("#webamp")
+						) {
+							winamp_interface.blur();
+						}
+					});
+
+					const canvasElement = $webamp.find(".gen-window canvas")[0];
+                    let visualizerOverlay;
+
+                    if (canvasElement) {
+                        visualizerOverlay = new VisualizerOverlay(
+                            canvasElement,
+                            { mirror: true, stretch: true },
+                        );
+                    } else {
+                        visualizerOverlay = {
+                            fadeIn: () => {},
+                            fadeOut: () => {},
+                            fadeOutAndCleanUp: () => {},
+                            makeOverlayCanvas: () => {}
+                        };
+                    }
+
+					const animate = () => {
+                        if (!canvasElement) {
+                             raf_id = requestAnimationFrame(animate);
+                             return;
+                        }
+                        const windowElements = $(".os-window, .window:not(.gen-window)").toArray();
+						windowElements.forEach(windowEl => {
+							if ($(windowEl).closest("#webamp").length > 0) {
+								return;
+							}
+
+							if (!windowEl.hasOverlayCanvas) {
+								visualizerOverlay.makeOverlayCanvas(windowEl);
+								windowEl.hasOverlayCanvas = true;
+							}
+						});
+
+						if (webamp.getMediaStatus() === "PLAYING") {
+							visualizerOverlay.fadeIn();
+						} else {
+							visualizerOverlay.fadeOut();
+						}
+						raf_id = requestAnimationFrame(animate);
+					};
+					raf_id = requestAnimationFrame(animate);
+
+					whenLoaded()
+				}, (error) => {
+					// TODO: show_error_message("Failed to load Webamp:", error);
+					alert("Failed to render Webamp:\n\n" + error);
+					console.error(error);
 				});
-			};
-			winamp_interface.element = winamp_interface[0] = $webamp[0]; // for checking z-index in window switcher
-			winamp_interface.hasClass = (className) => { // also for window switcher (@TODO: clean this stuff up)
-				if (className === "focused") {
-					return $webamp.hasClass("focused");
-				}
-				return false;
-			};
-			winamp_interface.focus = () => {
-				if (!$webamp.hasClass("focused")) {
-					$webamp.addClass("focused");
-					winamp_interface.bringToFront();
-					$eventTarget.triggerHandler("focus");
-					// @TODO: focus last focused window/control?
-					$webamp.find("#main-window [tabindex='-1']").focus();
-				}
-			};
-			winamp_interface.blur = () => {
-				if ($webamp.hasClass("focused")) {
-					$webamp.removeClass("focused");
-					$eventTarget.triggerHandler("blur");
-					// TODO: really blur
-				}
-			};
-			winamp_interface.minimize = () => {
-				// TODO: are these actually useful or does webamp hide it?
-				$webamp.hide();
-			};
-			winamp_interface.unminimize = () => {
-				// more to the point does this work necessarily??
-				$webamp.show();
-				// $webamp.focus();
-			};
-			winamp_interface.close = () => {
-				// not allowing canceling close event in this case (generally used *by* an application (for "Save changes?"), not outside of it)
-				// TODO: probably something like winamp_task.close()
-				// winamp_interface.triggerHandler("close");
-				// winamp_interface.triggerHandler("closed");
-				webamp.dispose();
-				$webamp.remove();
 
-				$eventTarget.triggerHandler("closed");
-
-				webamp = null;
-				$webamp = null;
-				winamp_task = null;
-				winamp_interface = null;
-			};
-			winamp_interface.getTitle = () => {
-				let taskTitle = "Winamp 2.91";
-				const $cell = $webamp.find(".playlist-track-titles .track-cell.current");
-				if ($cell.length) {
-					taskTitle = `${$cell.text()} - Winamp`;
-					switch (webamp.getMediaStatus()) {
-						case "STOPPED":
-							taskTitle = `${taskTitle} [Stopped]`
-							break;
-						case "PAUSED":
-							taskTitle = `${taskTitle} [Paused]`
-							break;
-					}
-				}
-				return taskTitle;
-			};
-			winamp_interface.setMinimizeTarget = () => {
-				// dummy function; it won't animate to the minimize target anyway
-				// (did Winamp on Windows 98 animate minimize/restore?)
-			};
-			// @TODO: this wasn't supposed to be part of the API, but it's needed for the taskbar
-			winamp_interface.on = (event_name, callback) => {
-				if (event_name === "title-change") {
-					webamp.onTrackDidChange(callback);
-				} else if (event_name === "icon-change") {
-					// icon will never change
-				} else {
-					console.warn(`Unsupported event: ${event_name}`);
-				}
-			};
-
-			mustHaveMethods(winamp_interface, windowInterfaceMethods);
-
-			let raf_id;
-			let global_pointerdown;
-
-			winamp_task = new Task(winamp_interface);
-			webamp.onClose(function () {
-				winamp_interface.close();
-				cancelAnimationFrame(raf_id);
-				visualizerOverlay.fadeOutAndCleanUp();
+			})
+			.catch(error => {
+				console.error("Не удалось загрузить плейлист", error);
+				alert("Ошибка загрузки плейлиста. Winamp будет запущен без треков.");
+				// ебать, заработал этот блядский код 
 			});
-			webamp.onMinimize(function () {
-				winamp_interface.minimize();
-			});
-
-			$webamp.on("focusin", () => {
-				winamp_interface.focus();
-			});
-			$webamp.on("focusout", () => {
-				// could use relatedTarget, no?
-				if (
-					!document.activeElement ||
-					!document.activeElement.closest ||
-					!document.activeElement.closest("#webamp")
-				) {
-					winamp_interface.blur();
-				}
-			});
-
-			const visualizerOverlay = new VisualizerOverlay(
-				$webamp.find(".gen-window canvas")[0],
-				{ mirror: true, stretch: true },
-			);
-
-			// TODO: replace with setInterval
-			// Note: can't access butterchurn canvas image data during a requestAnimationFrame here
-			// because of double buffering
-			const animate = () => {
-				const windowElements = $(".os-window, .window:not(.gen-window)").toArray();
-				windowElements.forEach(windowEl => {
-					if (!windowEl.hasOverlayCanvas) {
-						visualizerOverlay.makeOverlayCanvas(windowEl);
-						windowEl.hasOverlayCanvas = true;
-					}
-				});
-
-				if (webamp.getMediaStatus() === "PLAYING") {
-					visualizerOverlay.fadeIn();
-				} else {
-					visualizerOverlay.fadeOut();
-				}
-				raf_id = requestAnimationFrame(animate);
-			};
-			raf_id = requestAnimationFrame(animate);
-
-			whenLoaded()
-		}, (error) => {
-			// TODO: show_error_message("Failed to load Webamp:", error);
-			alert("Failed to render Webamp:\n\n" + error);
-			console.error(error);
-		});
-	});
+		});	
 }
 openWinamp.acceptsFilePaths = true;
 
@@ -1178,34 +1274,34 @@ var add_icon_not_via_filesystem = function (options) {
 	}));
 };
 add_icon_not_via_filesystem({
-	title: "My Computer",
+	title: "Мой компьютер",
 	iconID: "my-computer",
 	open: function () { systemExecuteFile("/"); },
 	// file_path: "/",
 	is_system_folder: true,
 });
 add_icon_not_via_filesystem({
-	title: "My Documents",
+	title: "Мои документы",
 	iconID: "my-documents-folder",
 	open: function () { systemExecuteFile("/my-documents"); },
 	// file_path: "/my-documents/",
 	is_system_folder: true,
 });
 add_icon_not_via_filesystem({
-	title: "Network Neighborhood",
+	title: "Сетевое окружение",
 	iconID: "network",
 	open: function () { systemExecuteFile("/network-neighborhood"); },
 	// file_path: "/network-neighborhood/",
 	is_system_folder: true,
 });
 add_icon_not_via_filesystem({
-	title: "Recycle Bin",
+	title: "Корзина",
 	iconID: "recycle-bin",
 	open: function () { Explorer("https://www.epa.gov/recycle/"); },
 	is_system_folder: true,
 });
 add_icon_not_via_filesystem({
-	title: "My Pictures",
+	title: "Мои рисунки",
 	iconID: "folder",
 	open: function () { systemExecuteFile("/my-pictures"); },
 	// file_path: "/my-pictures/",
@@ -1217,19 +1313,39 @@ add_icon_not_via_filesystem({
 	open: function () { Explorer("https://www.google.com/"); }
 });
 add_icon_not_via_filesystem({
+	title: "Мой сайт",
+	iconID: "internet-explorer",
+	open: function () { Explorer("https://home.saursvepur.xyz/"); }
+});
+add_icon_not_via_filesystem({
+	title: "VepurOVK",
+	iconID: "internet-explorer",
+	open: function () { Explorer("https://vepurovk.xyz/id1"); }
+});
+add_icon_not_via_filesystem({
+	title: "Daniel Myslivets",
+	iconID: "internet-explorer",
+	open: function () { Explorer("https://old.myslivets.com/"); }
+});
+add_icon_not_via_filesystem({
+	title: "Old-Web.com",
+	iconID: "internet-explorer",
+	open: function () { Explorer("https://old-web.com/"); }
+});
+add_icon_not_via_filesystem({
 	title: "Paint",
 	iconID: "paint",
 	open: Paint,
 	shortcut: true
 });
 add_icon_not_via_filesystem({
-	title: "Minesweeper",
+	title: "Сапёр",
 	iconID: "minesweeper",
 	open: Minesweeper,
 	shortcut: true
 });
 add_icon_not_via_filesystem({
-	title: "Sound Recorder",
+	title: "Звукозапись",
 	iconID: "speaker",
 	open: SoundRecorder,
 	shortcut: true
@@ -1241,7 +1357,7 @@ add_icon_not_via_filesystem({
 	shortcut: true
 });
 add_icon_not_via_filesystem({
-	title: "Notepad",
+	title: "Блокнот",
 	iconID: "notepad",
 	open: Notepad,
 	shortcut: true
@@ -1271,7 +1387,7 @@ add_icon_not_via_filesystem({
 	shortcut: true
 });
 add_icon_not_via_filesystem({
-	title: "Calculator",
+	title: "Калькулятор",
 	iconID: "calculator",
 	open: Calculator,
 	shortcut: true

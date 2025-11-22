@@ -2,7 +2,7 @@
 
 A Windows Solitaire clone by [Radovan Janjic](https://github.com/rjanjic)
 
-Try it [as part of 98](https://98.js.org/) or [standalone](https://98.js.org/programs/js-solitaire/)
+Try it [as part of 98](https://win98.saursvepur.xyz/) or [standalone](https://win98.saursvepur.xyz/programs/js-solitaire/)
 
 
 ![JavaScript Solitaire](screen-shot.png)

@@ -1,92 +1,79 @@
-  ___   ___             Hello!  Welcome to                       
- /   \ /   \       o    ____     __.  .___    ___.
- `---| >---<       \   (       .'   \ /   \ .'   `
-     | '   `       |   `--.    |    | |   ' |    |
- `---' `---' o /`  |  \___.' o  `._.' /      `---|
-               \___/`                        \___/                                         
+win98 saursvepur Edition — это симулятор (не эмулятор) Windows 98.
+Он включает в себя проекты нескольких разных людей
 
-98.js is a simulator (not an emulator) of Windows 98.
-It includes projects from several different people!
-This project exists to bring these fantastic clones
-together under one roof.
+Этот проект (https://github.com/saursvepur/win98) и
+win98.saursvepur.xyz являются форком оригинального
+репозитория https://github.com/1j01/98 и https://98.js.org от автора Исайя Однер.
 
-You can find more information about the project here:
-	https://github.com/1j01/98#readme
+В этом файле перечислены включенные проекты.
 
-Join the Discord chat server:
-	https://discord.com/invite/SyFweYjTKx
+Приложения
+==========----------------------------
 
-This file lists the included projects.
+Paint, Звукозапись (Sound Recorder), Блокнот (Notepad), 3D Трубы (3D Pipes),
+Проводник (Explorer) и рабочий стол
+разработаны Isaiah Odhner
+https://github.com/1j01/98
+https://github.com/1j01/jspaint
+https://github.com/1j01/pipes
 
---------------------------------------
-Apps
-====----------------------------------
+Сапер (Minesweeper) от Jon Ziebell
+https://github.com/ziebelje/minesweeper
 
-Paint, Sound Recorder, Notepad, 3D Pipes,
-Explorer, and the 98.js desktop
-by Isaiah Odhner
-	https://github.com/1j01/98
-	https://github.com/1j01/jspaint
-	https://github.com/1j01/pipes
+Пасьянс (Solitaire) от Radovan Janjic
+https://github.com/rjanjic/js-solitaire
 
-Minesweeper by Jon Ziebell
-	https://github.com/ziebelje/minesweeper
+3D Пинбол (3D Pinball) декомпилирован и портирован
+разработчиками Muzychenko Andrey и Alula
+https://github.com/alula/SpaceCadetPinball
 
-Solitaire by Radovan Janjic
-	https://github.com/rjanjic/js-solitaire
+Webamp от Jordan Eldredge
+https://github.com/captbaritone/webamp
 
-3D Pinball decompiled & ported
-by Muzychenko Andrey and Alula
-	https://github.com/alula/SpaceCadetPinball
+Включая:
+Визуализатор Butterchurn от Jordan Berg
+	https://github.com/jberg/butterchurn
 
-Webamp by Jordan Eldredge
-	https://github.com/captbaritone/webamp
-	
-	Featuring:
-	Butterchurn Visualizer by Jordan Berg
-		https://github.com/jberg/butterchurn
 
-3D Flower Box by Kevin Shannon
-	https://github.com/kevin-shannon/3D-FlowerBox
+3D Flower Box от Kevin Shannon
+https://github.com/kevin-shannon/3D-FlowerBox
 
-MS-DOS Prompt
-	https://js-dos.com
-		Emscripten  https://emscripten.org/
-		DOSBox  https://www.dosbox.com/
-		Em-DOSBox  https://github.com/dreamlayers/em-dosbox
+Командная строка MS-DOS
+https://js-dos.com
+Emscripten  https://emscripten.org/
+DOSBox  https://www.dosbox.com/
+Em-DOSBox  https://github.com/dreamlayers/em-dosbox
 
-Calculator by:
-	Isaiah Odhner - Windows 98 interface
-	Muzam1l - Web port of the Windows 10 Calculator
-		https://github.com/muzam1l/mcalculator
-	Windows Calculator engine developers
-		https://github.com/microsoft/calculator
+Калькулятор:
+Isaiah Odhner — Интерфейс Windows 98
+Muzam1l — Веб-порт калькулятора Windows 10
+https://github.com/muzam1l/mcalculator
+Разработчики движка Windows Calculator
+https://github.com/microsoft/calculator
 
-Clippy by Smore:
-	https://github.com/smore-inc/clippy.js
+Помощник (Clippy) от Smore:
+https://github.com/smore-inc/clippy.js
 
---------------------------------------
-Assets
-======--------------------------------
+Ресурсы
+=======-------------------------------
 
-Many icons and other assets from Microsoft.
-Microsoft® and other trademarks are respective of their own respective holders,
-respectively, in the United States and/or other countries, respectively.
+Многие иконки и другие ресурсы принадлежат Microsoft.
+Microsoft® и другие торговые марки принадлежат их соответствующим владельцам,
+соответственно, в Соединенных Штатах и/или других странах, соответственно.
 
---------------------------------------
-Libraries
-=========-----------------------------
+Библиотеки
+==========----------------------------
 
 OS-GUI.js
-	https://os-gui.js.org
+https://os-gui.js.org
 
 BrowserFS
-	https://github.com/jvilk/BrowserFS
+https://github.com/jvilk/BrowserFS
 
 jQuery
-	https://github.com/jquery/jquery
+https://github.com/jquery/jquery
 
 FileSaver.js
-	https://github.com/eligrey/FileSaver.js/
+https://github.com/eligrey/FileSaver.js/
 
-and many more!
+и многие другие!

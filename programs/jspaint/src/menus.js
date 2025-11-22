@@ -264,7 +264,7 @@ const menus = {
 					// Not all browsers support close() for closing a tab,
 					// so redirect instead. Exit to the official web desktop.
 					// @ts-ignore
-					window.location = "https://98.js.org/";
+					window.location = "https://win98.saursvepur.xyz/";
 				});
 			},
 			description: localize("Quits Paint."),

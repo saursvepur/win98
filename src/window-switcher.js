@@ -59,7 +59,7 @@
 		if (!used_window_switcher) {
 			agent?.stopCurrent(); // needed to continue on from the message with `hold` set (speak(message, true))
 			// Um, if you know about Alt+Tab, you can guess about how Alt+1 works. But Clippy is supposed to be annoying, right?
-			agent?.speak("There you go! Press 1 until you get to the window you want.");
+			agent?.speak("Давай! Нажимай 1, пока не переключитесь на нужное окно..");
 			used_window_switcher = true;
 		}
 	}
@@ -178,7 +178,7 @@
 				clippy.load("Clippy", function (loaded_agent) {
 					agent = loaded_agent;
 					agent.show();
-					const message = "It looks like you're trying to switch windows.\n\nUse Alt+1 instead of Alt+Tab within the 98.js desktop.\n\nAlso, use Alt+4 instead of Alt+F4 to close windows.";
+					const message = "Похоже, вы пытаетесь переключить окна.\n\nИспользуйте Alt+1 вместо Alt+Tab на рабочем столе win98.saursvepur.xyz\n\nКроме того, используйте Alt+4 вместо Alt+F4 для закрытия окон.";
 					agent.speak(message, true);
 					// held message causes double click to not animate Clippy, for some reason (even after message is cleared)
 					$(agent._el).one("dblclick", function () {

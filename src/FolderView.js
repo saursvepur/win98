@@ -83,12 +83,12 @@ var file_extension_icons = {
 // @TODO: bring system folders, icons, and file associations into one place
 const system_folder_path_to_name = {
 	"/": "(C:)", //"My Computer",
-	"/my-pictures/": "My Pictures",
-	"/my-documents/": "My Documents",
-	"/network-neighborhood/": "Network Neighborhood",
-	"/desktop/": "Desktop",
+	"/my-pictures/": "Мои рисунки",
+	"/my-documents/": "Мои документы",
+	"/network-neighborhood/": "Сетевое окружение",
+	"/desktop/": "Рабочий стол",
 	"/programs/": "Program Files",
-	"/recycle-bin/": "Recycle Bin",
+	"/recycle-bin/": "Корзина",
 };
 const system_folder_name_to_path = Object.fromEntries(
 	Object.entries(system_folder_path_to_name).map(([key, value]) => [value, key])

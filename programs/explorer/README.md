@@ -1,7 +1,7 @@
 
 # ![](../../images/icons/folder-open-32x32.png) Explorer
 
-Try it [as part of 98](https://98.js.org/) <!--or [standalone](https://98.js.org/programs/explorer/)-->
+Try it [as part of 98](https://win98.saursvepur.xyz/) <!--or [standalone](https://win98.saursvepur.xyz/programs/explorer/)-->
 
 This application functions as both Internet Explorer and Windows Explorer.
 

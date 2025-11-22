@@ -12,7 +12,7 @@
 				"precomposedIcons": false,
 				"declareOnlyDefaultIcon": true
 			},
-			"appName": "98.js"
+			"appName": "win98 - VEPUR Edition"
 		},
 		"desktopBrowser": {},
 		"windows": {
@@ -32,13 +32,13 @@
 					"rectangle": false
 				}
 			},
-			"appName": "98.js"
+			"appName": "win98 - VEPUR Edition"
 		},
 		"androidChrome": {
 			"pictureAspect": "noChange",
 			"themeColor": "#ffffff",
 			"manifest": {
-				"name": "98.js",
+				"name": "win98 - VEPUR Edition",
 				"display": "standalone",
 				"orientation": "notSet",
 				"onConflict": "override",

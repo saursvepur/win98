@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>98.js - Windows 98 Online</title>
+		<title>Windows 98 / saursvepur</title>
 		<link href="layout.css" rel="stylesheet" type="text/css">
 		<link href="lib/os-gui/layout.css" rel="stylesheet" type="text/css">
 		<link href="lib/os-gui/windows-98.css" rel="stylesheet" type="text/css">
@@ -24,11 +24,37 @@
 		<link rel="prefetch" href="/desktop/CREDITS.txt">
 		<link rel="prefetch" href="/programs/notepad/index.html">
 	</head>
+	<style>
+    html, body, * {
+        cursor: url('images/icons/arrow.cur'), default !important;
+    }
+	
+    a, button, label, select, option, summary, 
+    .start-button, .tray-icon, .taskbar-time,
+    a *, button *, .start-button *, .tray-icon * {
+        cursor: url('images/icons/hand.cur'), pointer !important;
+    }
+
+    input, textarea, [contenteditable], .address-bar {
+        cursor: url('images/icons/beam.cur'), text !important;
+    }
+
+    .wait, .wait *, .loading, .loading * {
+        cursor: url('images/icons/wait.ani'), wait !important;
+    }
+
+    .ui-draggable-dragging, .ui-draggable-dragging .ui-resizable-handle * {
+        cursor: url('images/icons/move.cur'), move !important;
+    }
+    .ui-resizable-handle {
+        cursor: inherit !important;
+    }
+    </style>
 	<body>
-		<div class="desktop" style="background-image: url(images/clouds.jpg); background-size: cover; background-position: center;"></div>
+		<div class="desktop" style="background-image: url(images/at_clouds.jpg); background-size: cover; background-position: center;"></div>
 		<div class="taskbar" style="z-index: 5000;">
 			<button class="start-button toggle" title="Click here to begin.">
-				<img src="images/start.png"/><b>Start</b>
+				<img src="images/start.png"/><b>Пуск</b>
 			</button>
 			<div class="taskbar-divider"></div>
 			<!-- TODO: pinned apps and resizing handles -->
@@ -36,19 +62,56 @@
 			<div class="taskbar-divider"></div>
 			<div class="tray inset-shallow">
 				<div class="tray-icons">
-					<img class="tray-icon" src="images/icons/task-scheduler-16x16.png" title="Task Scheduler is not ready." onclick="showMessageBox({iconID: 'info', message: 'Good day to you!'})">
-					<img class="tray-icon" src="images/icons/audio-okay-16x16.png" title="Volume" onclick="showMessageBox({iconID: 'info', message: 'Have a wonderful day!'})">
+					<img class="tray-icon" src="images/icons/task-scheduler-16x16.png" title="Task Scheduler is not ready." onclick="showMessageBox({iconID: 'info', message: 'здрасте!'})">
+					<img class="tray-icon" src="images/icons/audio-okay-16x16.png" title="Volume" onclick="showMessageBox({iconID: 'info', message: 'Звук работает!'})">
 				</div>
 				<div class="taskbar-time" ondblclick="showMessageBox({iconID: 'info', message: 'Time to get an old clock!'})"></div>
 			</div>
 		</div>
 		<div class="start-menu outset-deep" hidden style="display: none; z-index: 5001;">
 			<div class="start-menu-titlebar"></div>
-			<div class="start-menu-content">
-				<h1 style="font-family: cursive; font-size: 2em;">’S tart</h1>
-				<h2 style="font-family: cursive; font-size: 1em; color: gray; margin: 0; margin-left: 300px; white-space: nowrap;">’s a strawberry tart</h1>
-				<img src="https://i.postimg.cc/dtxsJq0d/CK1IhDr.gif"/>
-			</div>
+			<div class="start-menu-list">
+    <a href="https://github.com/saursvepur/win98" target="_blank" class="start-item">
+        <img src="https://win98icons.alexmeub.com/icons/png/world-3.png" style="width: 24px; height: 24px;">
+        <span>GitHub</span>
+    </a>
+
+    <div class="start-separator"></div>
+
+    <div class="start-item" onclick="systemExecuteFile('/my-documents')">
+        <img src="images/icons/my-documents-folder-32x32.png" style="width: 24px; height: 24px;">
+        <span>Мои документы</span>
+        <div class="arrow"></div>
+    </div>
+
+    <div class="start-item">
+        <img src="https://win98icons.alexmeub.com/icons/png/search_file-2.png" style="width: 24px; height: 24px;">
+        <span>Поиск</span>
+        <div class="arrow"></div>
+    </div>
+
+    <div class="start-item" onclick="openWinamp()">
+        <img src="images/icons/winamp2-32x32.png" style="width: 24px; height: 24px;">
+        <span>Winamp</span>
+    </div>
+
+    <div class="start-item" onclick="Explorer('https://www.yandex.ru/');">
+        <img src="images/icons/internet-explorer-32x32.png" style="width: 24px; height: 24px;">
+        <span>Internet Explorer</span>
+    </div>
+
+    <div class="start-separator"></div>
+
+    <div class="start-item">
+        <img src="https://win98icons.alexmeub.com/icons/png/key_win-4.png" style="width: 24px; height: 24px;">
+        <span>Выйти...</span>
+    </div>
+    
+    <div class="start-item" onclick="ShutDown();">
+        <img src="images/icons/shutdown-32x32.png" onerror="this.src='https://win98icons.alexmeub.com/icons/png/shut_down_normal-4.png'" style="width: 24px; height: 24px;">
+        <span>Выключить...</span>
+    </div>
+        </div>
 		</div>
 		<script src="lib/jquery.min.js"></script>
 		<script src="lib/browserfs.js"></script>
@@ -100,15 +163,14 @@
 				</filter>
 			</defs>
 		</svg>
-		<script>
-			// This doesn't seem to be a problem in the Help viewer,
-			// but better safe than sorry.
-			window.addEventListener("resize", ()=> {
-				// work around a browser bug in Chrome where
-				// the SVG filter behaves differently based on the INITIAL zoom level
-				// (if you zoom in, the icons get cut off, if you zoom out, the effect is too thick)
-				document.getElementById("disabled-inset-filter").setAttribute("x", "0");
-			});
-		</script>
+	<script>
+        document.ondragstart = noselect; 
+        // запрет на перетаскивание 
+        document.onselectstart = noselect; 
+        // запрет на выделение элементов страницы 
+        document.oncontextmenu = noselect; 
+        // запрет на выведение контекстного меню 
+        function noselect() {return false;} 
+    </script>
 	</body>
 </html>

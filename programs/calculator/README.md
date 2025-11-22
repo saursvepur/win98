@@ -3,7 +3,7 @@
 Remake of the Windows 98 Calculator program for the web, using the [open sourced Windows 10 calculator](https://github.com/microsoft/calculator) engine, [ported to the web](https://github.com/muzam1l/mcalculator) by [muzamil](https://github.com/muzam1l).
 Interface recreated in detail by [Isaiah Odhner](https://isaiahodhner.io).
 
-Try it [as part of 98](https://98.js.org/) or [standalone](https://98.js.org/programs/calculator/)
+Try it [as part of 98](https://win98.saursvepur.xyz/) or [standalone](https://win98.saursvepur.xyz/programs/calculator/)
 
 <table>
 <tr><td>Reference</td><td>Remake</td></tr>

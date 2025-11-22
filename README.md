@@ -1,145 +1,108 @@
+# [**win98.saursvepur.xyz**](https://www.google.com/search?q=/https://win98.saursvepur.xyz)
 
-# ![](images/icons/windows-update-32x32.png) [win98.saursvepur.xyz](/https://win98.saursvepur.xyz)
+Веб-симулятор рабочего стола Windows 98\.  
+**Примечание:** Этот проект ([https://github.com/saursvepur/win98](https://github.com/saursvepur/win98) и [win98.saursvepur.xyz](https://win98.saursvepur.xyz)) является форком оригинального репозитория [https://github.com/1j01/98](https://github.com/1j01/98) и сайта [https://98.js.org](https://98.js.org) от автора Исайя Однер (https://isaiahodhner.io/) .  
 
-[![Discord](https://img.shields.io/discord/1141194608525713478)](https://discord.com/invite/SyFweYjTKx)
-[![GitHub Repo stars](https://img.shields.io/github/stars/1j01/98)](https://github.com/1j01/98/stargazers)
+Включает в себя:
 
-A web based Windows 98 desktop remake.
+* Блокнот ([отдельный README](https://www.google.com/search?q=programs/notepad/README.md))  
+* Звукозапись ([отдельный README](https://www.google.com/search?q=programs/sound-recorder/README.md))  
+* Paint ([отдельный репозиторий](https://github.com/1j01/jspaint))  
+* Калькулятор ([отдельный README](https://www.google.com/search?q=programs/calculator/README.md))  
+* 3D Трубы ([отдельный репозиторий](https://github.com/1j01/pipes))  
+* 3D FlowerBox ([оригинальный репозиторий](https://github.com/kevin-shannon/3D-FlowerBox)) от [Kevin Shannon](https://github.com/kevin-shannon)  
+* Сапер ([отдельный README](https://www.google.com/search?q=programs/minesweeper/README.md); [оригинальный репозиторий](https://github.com/ziebelje/minesweeper)) от [Jon Ziebell](https://github.com/ziebelje/)  
+* Пасьянс ([оригинальный репозиторий](https://github.com/rjanjic/js-solitaire)) от [Radovan Janjic](https://github.com/rjanjic)  
+* Пинбол ([оригинальный репозиторий](https://github.com/alula/SpaceCadetPinball)) портирован [Muzychenko Andrey](https://github.com/k4zmu2a) и [Alula](https://github.com/alula)  
+* Winamp 2.9 + 1 500 композиций ([отдельный README](https://www.google.com/search?q=programs/winamp/README.md); [оригинальный репозиторий](https://github.com/captbaritone/webamp)) от [Jordan Eldredge](https://jordaneldredge.com/)  
+* Проводник Windows / Internet Explorer ([отдельный README](https://www.google.com/search?q=programs/explorer/README.md))  
+* Просмотр справки  
+* 📎 Помощник (Clippy) ([оригинальный репозиторий](https://github.com/smore-inc/clippy.js))
 
-Includes:
-* ![](images/icons/notepad-16x16.png) Notepad ([separate README](programs/notepad/README.md))
-* ![](images/icons/speaker-16x16.png) Sound Recorder ([separate README](programs/sound-recorder/README.md))
-* ![](images/icons/paint-16x16.png) Paint ([separate repository](https://github.com/1j01/jspaint))
-* ![](images/icons/calculator-16x16.png) Calculator ([separate README](programs/calculator/README.md))
-* ![](images/icons/pipes-16x16.png) 3D Pipes ([separate repository](https://github.com/1j01/pipes))
-* ![](images/icons/pipes-16x16.png) 3D FlowerBox ([original repository](https://github.com/kevin-shannon/3D-FlowerBox)) by [Kevin Shannon](https://github.com/kevin-shannon)
-* ![](images/icons/minesweeper-16x16.png) Minesweeper ([separate README](programs/minesweeper/README.md); [original repository](https://github.com/ziebelje/minesweeper)) by [Jon Ziebell](https://github.com/ziebelje/)
-* ![](images/icons/solitaire-16x16.png) Solitaire ([original repository](https://github.com/rjanjic/js-solitaire)) by [Radovan Janjic](https://github.com/rjanjic)
-* ![](images/icons/pinball-16x16.png) Pinball ([original repository](https://github.com/alula/SpaceCadetPinball)) ported by [Muzychenko Andrey](https://github.com/k4zmu2a) and [Alula](https://github.com/alula)
-* ![](images/icons/winamp2-16x16.png) Winamp 2.9 ([separate README](programs/winamp/README.md); [original repository](https://github.com/captbaritone/webamp)) by [Jordan Eldredge](https://jordaneldredge.com/)
-* ![](images/icons/folder-open-16x16.png) Windows Explorer / ![](images/icons/internet-explorer-16x16.png) Internet Explorer ([separate README](programs/explorer/README.md))
-* ![](images/icons/chm-16x16.png) Help Viewer
-* 📎 Clippy ([original repository](https://github.com/smore-inc/clippy.js))
+Особенности:
 
-Features:
-* Drop files onto the desktop, and they'll be stored in a virtual filesystem
-* Load Windows themes! Many are included in the Themes folder on the desktop.
-* Easter eggs (try a famous cheat code 😉)
-* Meticulous detail in many areas (although there's obviously lots "missing")
-* **Help > Help Topics** in Paint, Sound Recorder, Notepad, and Minesweeper
-* You can add the site to your homescreen on mobile
+* Перетаскивайте файлы на рабочий стол, и они сохранятся в виртуальной файловой системе  
+* Загружайте темы Windows\! Многие из них уже включены в папку Themes на рабочем столе.  
+* Пасхалки
+* Тщательная проработка деталей во многих областях (хотя, очевидно, многого еще "не хватает")  
+* **Справка \> Разделы справки** в Paint, Звукозаписи, Блокноте и Сапере  
+* Вы можете добавить сайт на главный экран на мобильном устройстве
 
-## Try it out
+## **Попробовать**
 
-[ ＥＮＴＥＲ　![](images/icons/windows-update-16x16.png)　ＷＩＮＤＯＷＳ　９８ (https://win98.saursvepur.xyz/)
+\[ ＥＮＴＥＲ　　ＷＩＮＤＯＷＳ　９８ (https://win98.saursvepur.xyz/)
 
-[![](images/3d.jpg)](https://98.js.org/)
+## **Лицензия**
 
-## License
+Лицензии пока нет.  
+На данный момент этот проект имеет доступный исходный код / shared source, но не является Open Source (в строгом понимании).
 
-Not yet licensed.
-This project is currently [source-available / shared source](https://en.wikipedia.org/wiki/Source-available_software), but not [open source](https://en.wikipedia.org/wiki/Open-source_software).
+## **Похожие проекты**
 
-## Related Projects
+Приложения, которые было бы неплохо интегрировать:
 
-Apps that it would be nice to integrate:
-* [![](images/icons/settings-16x16.png) Windows Classic theme designer](https://github.com/tpenguinltg/winclassic)
-* [![](images/icons/media-player-16x16.png) Win95 Media Player](https://benwiley4000.github.io/win95-media-player/)
+* [Дизайнер тем Windows Classic](https://github.com/tpenguinltg/winclassic)  
+* [Win95 Media Player](https://benwiley4000.github.io/win95-media-player/)
 
-Other online operating systems / web desktops:
+Другие онлайн операционные системы / веб\-десктопы:
 
-| Name & Link                                                                                           | Vague Description                | Repo & License                                                                                                                                         | Chat                                    |
-|-------------------------------------------------------------------------------------------------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------|
-| [![](images/start.png)&nbsp;Rahul.io](https://rahul.io/)                                              | another Windows 98 remake        | [repo here](https://github.com/lolstring/window98-html-css-js) - MIT license                                                                           |                                         |
-| [![](images/icons/windows-93-16x16.png)&nbsp;Windows&nbsp;93](https://www.windows93.net/)             | a "fictional version of Windows" | (not open source currently)                                                                                                                            | [Discord](https://discord.gg/vAmMu7q)   |
-| [🏡 ZineOS](https://whimsy.space/)                                                                     | emojis everywhere                | [repo here](https://github.com/STRd6/zine) - MIT license                                                                                               | [Discord](https://discord.gg/tUj4zYA)   |
-| [![](images/icons/emuos-16x16.png)&nbsp;EmuOS](https://emupedia.net/beta/emuos/)                      | emulator-focused Win9X desktop   | [repo here](https://github.com/Emupedia/emupedia.github.io) - shared source                                                                            | [Discord](https://discord.gg/5u4VR9v)   |
-| [![](images/icons/os-js-16x16.png)&nbsp;OS.js](https://www.os-js.org/)                                | a more serious web desktop       | [repo here](https://github.com/os-js/OS.js) - simplified BSD license                                                                                   | [Gitter](https://gitter.im/os-js/OS.js) |
-| [![](images/icons/friend-16x16.png)&nbsp;Friend](https://friendup.cloud/)                             | another serious one              | [repo here](https://github.com/FriendUPCloud/friendup) - different licenses for different [parts](https://github.com/FriendUPCloud/friendup#licensing) |                                         |
-| [![](images/icons/clouddesk-16x16.png)&nbsp;CloudDesk](http://altaica.altervista.org/)                | another serious one              | (explicitly not open source)                                                                                                                           |                                         |
-| [![](images/icons/aaronos-16x16.png)&nbsp;AaronOS](https://aaronos.dev/AaronOS/aosBeta.php)           | interesting aesthetic            | [repo here](https://github.com/MineAndCraft12/AaronOS) - shared source                                                                                 | [Discord](https://discord.gg/eWDac7E)   |
-| [![](images/icons/webdesktop-16x16.png)&nbsp;Web&nbsp;Desktop](https://webdesktop.net/)               | Windows 10 like "startpage"      |                                                                                                                                                        |                                         |
-| [![](images/icons/system-16x16.png)&nbsp;System](https://system-developer-beta.000webhostapp.com/)    | Windows 10 like thing            |                                                                                                                                                        |                                         |
-| [![](images/icons/winxp-doge-16x16.png)&nbsp;WinXP](https://winxp.now.sh/)                            | Windows XP                       | [repo here](https://github.com/ShizukuIchi/winXP/) - MIT license                                                                                       |                                         |
-| [Windows 98 - Packard Belle](https://packard-belle.netlify.com/)                                      | Windows 98                       | [repo here](https://github.com/padraigfl/packard-belle-desktop) - shared source                                                                        |                                         |
-| [X-WebDesktop-Vue](http://47.93.49.248/X-WebDesktop-Vue/)                                             | Windows 7                        | [repo here](https://github.com/OXOYO/X-WebDesktop-Vue) - MIT license                                                                                   |                                         |
-| [![](images/icons/vue-win3.1-16x16.png)&nbsp;vue win3.1](https://disjfa.github.io/vue-win-3.1/)       | Windows 3.1                      | [repo here](https://github.com/disjfa/vue-win-3.1) - shared source                                                                                     |                                         |
-| [![](images/icons/virtualdesktop.org-16x16.png)&nbsp;VirtualDesktop](http://virtualdesktop.org/)      | Screenshot flows, several OSes   |                                                                                                                                                        |                                         |
-| [GUIdebook](https://guidebookgallery.org/guis/windows/)                                               | Screenshots, several OSes        |                                                                                                                                                        |                                         |
+| Название и Ссылка | Краткое описание | Репозиторий и Лицензия | Чат |
+| :---- | :---- | :---- | :---- |
+| [ Rahul.io](https://rahul.io/) | еще один ремейк Windows 98 | [репо здесь](https://github.com/lolstring/window98-html-css-js) \- лицензия MIT |  |
+| [ Windows 93](https://www.windows93.net/) | "вымышленная версия Windows" | (на данный момент закрытый код) | [Discord](https://discord.gg/vAmMu7q) |
+| [🏡 ZineOS](https://whimsy.space/) | смайлики повсюду | [репо здесь](https://github.com/STRd6/zine) \- лицензия MIT | [Discord](https://discord.gg/tUj4zYA) |
+| [ EmuOS](https://emupedia.net/beta/emuos/) | десктоп Win9X с упором на эмуляцию | [репо здесь](https://github.com/Emupedia/emupedia.github.io) \- shared source | [Discord](https://discord.gg/5u4VR9v) |
+| [ OS.js](https://www.os-js.org/) | более серьезный веб\-десктоп | [репо здесь](https://github.com/os-js/OS.js) \- упрощенная лицензия BSD | [Gitter](https://gitter.im/os-js/OS.js) |
+| [ Friend](https://friendup.cloud/) | еще один серьезный проект | [репо здесь](https://github.com/FriendUPCloud/friendup) \- разные лицензии для разных [частей](https://github.com/FriendUPCloud/friendup#licensing) |  |
+| [ CloudDesk](http://altaica.altervista.org/) | тоже серьезный проект | (явно не open source) |  |
+| [ AaronOS](https://aaronos.dev/AaronOS/aosBeta.php) | интересная эстетика | [репо здесь](https://github.com/MineAndCraft12/AaronOS) \- shared source | [Discord](https://discord.gg/eWDac7E) |
+| [ Web Desktop](https://webdesktop.net/) | "стартовая страница" как в Win10 |  |  |
+| [ System](https://system-developer-beta.000webhostapp.com/) | штука похожая на Windows 10 |  |  |
+| [ WinXP](https://winxp.now.sh/) | Windows XP | [репо здесь](https://github.com/ShizukuIchi/winXP/) \- лицензия MIT |  |
+| [Windows 98 \- Packard Belle](https://packard-belle.netlify.com/) | Windows 98 | [репо здесь](https://github.com/padraigfl/packard-belle-desktop) \- shared source |  |
+| [X-WebDesktop-Vue](http://47.93.49.248/X-WebDesktop-Vue/) | Windows 7 | [репо здесь](https://github.com/OXOYO/X-WebDesktop-Vue) \- лицензия MIT |  |
+| [ vue win3.1](https://disjfa.github.io/vue-win-3.1/) | Windows 3.1 | [репо здесь](https://github.com/disjfa/vue-win-3.1) \- shared source |  |
+| [ VirtualDesktop](http://virtualdesktop.org/) | Потоки скриншотов, несколько ОС |  |  |
+| [GUIdebook](https://guidebookgallery.org/guis/windows/) | Скриншоты, несколько ОС |  |  |
 
+И многие другие веб\-десктопы на Википедии,  
+awesome-web-desktops,  
+и awesome-OS.  
+Библиотеки:
 
-Plus many more [web desktops on Wikipedia](https://en.wikipedia.org/wiki/Web_desktop),
-[awesome-web-desktops](https://github.com/syxanash/awesome-web-desktops),
-and [awesome-OS](https://github.com/zriyans/awesome-OS).
+* [OS-GUI](https://os-gui.js.org), которая выросла из этого проекта  
+* Packard Belle,  
+  React95,  
+  и еще одна React95, с целями, похожими на OS-GUI  
+* [BrowserFS](https://github.com/jvilk/BrowserFS), библиотека абстракции файловой системы, на которой работает 98.js
 
-Libraries:
-* [![](images/icons/task-16x16.png) OS-GUI](https://os-gui.js.org), which grew out of this project
-* ![](images/icons/task-16x16.png) [Packard Belle](https://github.com/padraigfl/packard-belle/),
-  [React95](https://github.com/React95/React95/),
-  and another one called [React95](https://github.com/arturbien/React95), with similar goals to OS-GUI
-* [![](images/icons/folder-16x16.png) BrowserFS](https://github.com/jvilk/BrowserFS), a filesystem abstraction library powering 98.js
+Также:
 
-Also:
-* [Awesome Atwood's Law](https://github.com/captbaritone/awesome-attwoods-law), a curated list of JavaScript reimplementations, similar to [/r/atwoodslaw/](https://www.reddit.com/r/atwoodslaw/)
+* [Awesome Atwood's Law](https://github.com/captbaritone/awesome-attwoods-law), курируемый список JavaScript-реимплементаций, похожий на [/r/atwoodslaw/](https://www.reddit.com/r/atwoodslaw/)
 
-## Contributing
+## **Настройка на локальном сервере**
 
-See [CONTRIBUTING](CONTRIBUTING.md)
+Как запустить:
 
-## Development Setup
+1. **Установите необходимые инструменты:**  
+   * [Git](https://git-scm.com/)  
+   * [Node.js](https://nodejs.org/)  
+2. Клонируйте репозиторий:  
+   Откройте терминал и выполните команду:  
+   git clone \[https://github.com/saursvepur/win98.git\](https://github.com/saursvepur/win98.git)  
+   cd win98
 
-- Install [Git](https://git-scm.com/) if you don't already have it.
-- Install [Node.js](https://nodejs.org/) if you don't already have it.
-- [Clone the repository.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
-- Open up a terminal / command prompt in the project directory, and run `npm install` to install dependencies.
-- Install one global dependency: `npm i -g browserfs@2.0.0` (this will be simplified in the future; I'm using two different versions of BrowserFS for some reason)
-- Run `npm start` to start up a live-reloading development web server.
+3. Установите зависимости:  
+   В папке проекта выполните:  
+   npm install
 
-When pulling changes from git, run `npm install` again in case there are any new or updated dependencies.
-(If you know `package-lock.json` hasn't changed, you shouldn't need to do this.)
+4. Установите BrowserFS (специальная версия):  
+   Для корректной работы требуется определенная версия BrowserFS глобально:  
+   npm i \-g browserfs@2.0.0
 
-Some dependencies are versioned with npm, but pulled into the repo with `npm run pull-libs`
+5. **Запустите сервер:**  
+   npm start
 
-### Quality Assurance
+   После этого откроется локальный сервер с поддержкой live-reloading.
 
-Tests are written with Playwright. Spell checking is done with Cspell.
-
-```
-npm test
-npm run lint
-```
-
-Debug tests or run them when code changes using the Playwright UI:
-
-```
-npx playwright test --ui
-```
-
-Quickly add tests using the code generator:
-
-```
-# Note: this runs the server, and currently leaves it running when closing the browser.
-# Could use `start-server-and-test` to fix this, or see if there's an option in `npm-run-all`'s `run-p` command.
-# (There's no option in `playwright codegen --help` to run the server, even though it's configured in `playwright.config.js`)
-npm run test-codegen
-```
-
-There are also VS Code extensions for Playwright and Cspell (Code Spell Checker).
-
-
-### Managing Subrepos
-
-To update subrepos, or push changes to them, install [git-subrepo](https://github.com/ingydotnet/git-subrepo). You don't need this tool to clone the project and get up and running, as subrepos are just normal subdirectories with a `.gitrepo` metadata file.
-
-Note that the metadata file references specific commit hashes, including between repositories, so it's best to avoid rebasing when subrepo updates are involved, i.e. once you do a subrepo command, it makes a commit, and you should leave it (and earlier commits) alone, and you should leave commits in the subrepo alone, before and up to any commits referenced by the containing project.
-
-When making changes to a subrepo within the containing project:
-I'd recommend phrasing commit messages to apply to the subrepo, primarily, rather than the containing project,
-so that when you push the changes to the subrepo, the commit message will be appropriate.
-
-If you so much as edit the commit message for a `git subrepo push`ed commit, you'd have to update the `.gitrepo` metadata file manually in the containing project,
-OR you could drop the commit you pushed and the `git subrepo push` commit (which updates the metadata) and do `git subrepo pull` instead (which btw gives you an option to rename the commit; and I think renaming that commit would be safe after the fact anyways as long as it's the last commit and not pushed).
-
-## TODO
-
-See [TODO](TODO.md)
+При обновлении кода из репозитория (git pull), рекомендуется снова запускать npm install для обновления зависимостей.

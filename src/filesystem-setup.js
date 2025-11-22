@@ -6,11 +6,11 @@ var __fs_waiting_callbacks = [];
 
 const desktop_folder_path = "/desktop/";
 
-// For Wayback Machine, match URLs like https://web.archive.org/web/20191213113214/https://98.js.org/
-// (also match URLs like https://98.js.org/ because why not)
+// For Wayback Machine, match URLs like https://web.archive.org/web/20191213113214/https://win98.saursvepur.xyz/
+// (also match URLs like https://win98.saursvepur.xyz/ because why not)
 const web_server_root_for_browserfs =
-	location.href.match(/98.js.org/) ?
-		location.href.match(/.*98.js.org/)[0] + "/" :
+	location.href.match(/win98.saursvepur.xyz/) ?
+		location.href.match(/.*win98.saursvepur.xyz/)[0] + "/" :
 		"/";
 
 BrowserFS.configure({

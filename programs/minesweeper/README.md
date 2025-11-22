@@ -3,7 +3,7 @@
 
 A Minesweeper clone by [Jon Ziebell](https://github.com/ziebelje/)
 
-Try it [as part of 98](https://98.js.org/) or [standalone](https://98.js.org/programs/minesweeper/)
+Try it [as part of 98](https://win98.saursvepur.xyz/) or [standalone](https://win98.saursvepur.xyz/programs/minesweeper/)
 
 
 ### TODO

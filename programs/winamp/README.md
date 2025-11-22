@@ -3,7 +3,7 @@
 
 [Webamp](https://github.com/captbaritone/webamp) by [Jordan Eldredge](https://jordaneldredge.com/)
 
-Try it [on 98.js.org](https://98.js.org/) or [standalone at webamp.org](https://webamp.org/)
+Try it [on win98.saursvepur.xyz](https://win98.saursvepur.xyz/) or [standalone at webamp.org](https://webamp.org/)
 
 
 ### TODO

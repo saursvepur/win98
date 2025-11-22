@@ -79,8 +79,8 @@ Hairy problem: causes horizontal scrolling on narrow viewports.
 	image-rendering: auto;
 }
 
-a[href^="https://98.js.org"]:hover #wooden-window-frame,
-a[href^="https://98.js.org"]:focus #wooden-window-frame {
+a[href^="https://win98.saursvepur.xyz"]:hover #wooden-window-frame,
+a[href^="https://win98.saursvepur.xyz"]:focus #wooden-window-frame {
 	transform: scale(1.2);
 	box-shadow:
 		0 0 5px 2px rgba(0, 43, 78, 0.5),

@@ -480,16 +480,6 @@ var menus = {
 			},
 			description: "Opens My Computer.",
 		},
-		{
-			label: "&Internet Call",
-			action: () => {
-				// @TODO: host a configured version in order to theme it,
-				// maybe allow sharing individual windows on the 98.js desktop?
-				// How much of NetMeeting should I implement? :P
-				go_to("https://brie.fi/ng/98?audio=1&video=1&fs=0&invite=0&share=0&chat=1");
-			},
-			description: "Opens your Internet call and meeting program.",
-		},
 	],
 	"F&avorites": [
 		// description: "Displays the contents of your Favorites folder.",
@@ -561,13 +551,13 @@ var menus = {
 		MENU_DIVIDER,
 		{
 			// label: "&About Windows 98",
-			label: "&About 98.js.org",
+			label: "&About",
 			action: function () {
 				// TODO: about dialog
-				window.open("https://github.com/1j01/98#readme");
+				window.open("https://github.com/saursvepur/win98");
 			},
 			// description: "Displays program information, version number, and copyright.",
-			description: "Opens the 98.js project Web page.",
+			description: "Open the my fork win98 project Web page.",
 		}
 	],
 };

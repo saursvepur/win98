@@ -9,6 +9,18 @@ function parse_query_string(queryString) {
 	return query;
 }
 
+function escapeHtml(text) {
+    if (!text) return text;
+    const str = String(text); 
+    
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 function set_title(title) {
 	document.title = title;
 
@@ -83,188 +95,163 @@ setInterval(() => {
 
 var go_to = async function (address, action_name = "go") {
 
-	// for preventing focus from being lost when navigating
-	// folder_view.element.contains(document.activeElement) is not needed because
-	// the folder view is currently in an iframe (the iframe)
-	const had_focus = $iframe && document.activeElement === $iframe[0];
+    const had_focus = $iframe && document.activeElement === $iframe[0];
+    let normalized_address, is_url, zone;
+    try {
+        ({ normalized_address, is_url, zone } = await resolve_address(address));
+    } catch (error) {
+        if (error._is_drive_not_found_error) {
+            alert("Drive not found."); return;
+        } else if (error._is_stat_error) {
+            alert("Failed to get info about " + address + "\n\n" + error); return;
+        } else {
+            alert("Failed to resolve address " + address + "\n\n" + error); return;
+        }
+    }
+    address = normalized_address;
 
-	// @TODO: split out src and normalized address, and use normalized address for the input, but use src for the iframe
-	// so the address can show the system path, and Up command can return to a folder (rather than an HTTP server's folder listing, or a 404, depending on the server)
+    let display_address = address;
+    if (typeof display_address === 'string' && display_address.includes("/web/")) {
+        const match = display_address.match(/\/web\/\d+\/(http.*)/);
+        if (match && match[1]) {
+            display_address = match[1];
+            if (display_address.match(/^https?:\/[^/]/)) {
+                display_address = display_address.replace(":/", "://");
+            }
+        }
+    }
+    
+    if (action_name !== "initially-load" && (action_name !== "refresh" || zone !== "local")) {
+        try { navigate_audio.play(); } catch (e) {}
+    }
 
-	let normalized_address, is_url, zone;
-	try {
-		({ normalized_address, is_url, zone } = await resolve_address(address));
-	} catch (error) {
-		if (error._is_drive_not_found_error) {
-			alert("Drive not found.");
-			return;
-		} else if (error._is_stat_error) {
-			alert("Failed to get info about " + address + "\n\n" + error);
-			return;
-		} else {
-			alert("Failed to resolve address " + address + "\n\n" + error);
-			return;
-		}
-	}
-	address = normalized_address;
+    if (zone === "internet") {
+        if (offline_mode) {
+            if (await showMessageBox({ title: "Offline", message: "Connect?", buttons: [{label:"Connect", value:"connect", default:true}, {label:"Stay Offline"}] }) === "connect") {
+                offline_mode = false;
+            } else { return; }
+        }
+        $("#internet-buttons").show();
+        $("#standard-buttons").hide();
+    } else {
+        $("#internet-buttons").hide();
+        $("#standard-buttons").show();
+    }
 
-	if (
-		action_name !== "initially-load" && // load can take time, and thus the sound doesn't work well as an "action sound"
-		(action_name !== "refresh" || zone !== "local") // don't play the sound for refreshing local folders
-	) {
-		try {
-			navigate_audio.play();
-		} catch (e) {
-			console.log("navigate_audio.play() failed: " + e);
-		}
-	}
+    if (system_folder_path_to_name[address]) {
+        $("#address").val(system_folder_path_to_name[address]);
+    } else {
+        $("#address").val(display_address);
+    }
+    $("#address-icon").attr("src", getIconPath(get_icon_for_address(address), 16));
 
-	if (zone === "internet") {
-		if (offline_mode) {
-			if (await showMessageBox({
-				title: "Web page unavailable while offline",
-				message: "The Web page you requested is not available while offline.\n\n" +
-					"To view this page, click Connect.",
-				buttons: [
-					// @TODO: accelerators &C and &S
-					{
-						label: "Connect",
-						value: "connect",
-						default: true,
-					},
-					{
-						label: "Stay Offline",
-					},
-				],
-				iconID: "offline",
-			}) === "connect") {
-				offline_mode = false;
-			} else {
-				return;
-			}
-		}
-		$("#internet-buttons").show();
-		$("#standard-buttons").hide();
-	} else {
-		$("#internet-buttons").hide();
-		$("#standard-buttons").show();
-	}
+    if (action_name === "go") {
+        history_back_stack.push(active_address);
+        history_forward_stack.length = 0;
+    }
+    active_address = address;
+    
+    let title_fallback = get_display_name_for_address(display_address);
+    
+    if (zone === "internet") {
+        try {
+            const urlObj = new URL(display_address.startsWith("http") ? display_address : "http://" + display_address);
+            let hostname = urlObj.hostname.replace(/^www\./, '');
+            title_fallback = hostname.charAt(0).toUpperCase() + hostname.slice(1);
+        } catch(e) {}
+        
+        set_title(title_fallback + " - Microsoft Internet Explorer");
 
-	if (system_folder_path_to_name[address]) {
-		$("#address").val(system_folder_path_to_name[address]);
-	} else {
-		$("#address").val(address);
-	}
-	$("#address-icon").attr("src", getIconPath(get_icon_for_address(address), 16));
+        const target_url = address;
+        const proxy_url = `https://corsproxy.io/?${encodeURIComponent(target_url)}`;
 
-	// if (action_name === "back") {
-	// 	history_forward_stack.push(active_address);
-	// } else if (action_name === "forward") {
-	// 	history_back_stack.push(active_address);
-	// } else
-	if (action_name === "go") {
-		history_back_stack.push(active_address);
-		history_forward_stack.length = 0;
-	} else {
-		// for refresh and initial load, leave history stacks alone
-		// for back and forward, handle them externally?
-	}
-	active_address = address; // must come after pushing to history stack
+        fetch(proxy_url)
+            .then(response => {
+                if (!response.ok) throw new Error(`Proxy error: ${response.status} ${response.statusText}`);
+                return response.arrayBuffer();
+            })
+            .then(buffer => {
+                if (active_address !== target_url) return;
 
-	set_title(get_display_name_for_address(address));
-	set_icon(get_icon_for_address(address));
+                const encodings = [
+                    "utf-8",          
+                    "windows-1251",   
+                    "koi8-r",         
+                    "iso-8859-5",
+                    "iso-8859-1"
+                ];
 
-	$("#status-bar-left-text").empty();
+                for (let encoding of encodings) {
+                    try {
+                        const decoder = new TextDecoder(encoding);
+                        const html = decoder.decode(buffer);
 
-	// Only remove content after any async operations have completed, and in particular, after navigation is confirmed, in the case that there's a dialog box.
-	if (folder_view) {
-		folder_view.element.remove();
-		folder_view = null;
-	}
-	if ($iframe) {
-		$iframe.remove();
-		$iframe = null;
-	}
-	$("#content").empty(); // in case of apps loaded in the iframe which append menu bars outside of the iframe (@TODO: make apps not do this, and instead look only for a specifically designated $Window instance associated with the iframe)
+                        if (encoding === "utf-8" && html.includes("\uFFFD")) {
+                            continue;
+                        }
 
-	if (is_url) {
-		$iframe = $("<iframe>").attr({
-			src: address,
-			allowfullscreen: "allowfullscreen",
-			sandbox: "allow-same-origin allow-scripts allow-forms allow-pointer-lock allow-modals allow-popups",
-			allow: "camera https://brie.fi;microphone https://brie.fi",
-		}).appendTo("#content");
+                        const match = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+                        if (match && match[1]) {
+                            let extracted_title = match[1].trim();
+                            
+                            const txt = document.createElement("textarea");
+                            txt.innerHTML = extracted_title;
+                            extracted_title = txt.value.replace(/[\r\n]+/g, " ").replace(/\s+/g, " ").trim();
 
-		enhance_iframe($iframe[0]);
+                            if (extracted_title) {
+                                set_title(extracted_title + " - Microsoft Internet Explorer");
+                                break;
+                            }
+                        }
+                    } catch (e) {
+                        console.warn("Ошибка декодирования " + encoding);
+                    }
+                }
+            })
 
-		// If only we could access the contentDocument cross-origin
-		// For https://archive.is/szqQ5
-		// $iframe.on("load", function(){
-		// 	$($iframe[0].contentDocument.getElementById("CONTENT")).css({
-		// 		position: "absolute",
-		// 		left: 0,
-		// 		top: 0,
-		// 		right: 0,
-		// 		bottom: 0,
-		// 	});
-		// });
+    } else {
+        set_title(title_fallback);
+    }
 
-		// We also can't inject a user agent stylesheet, for things like scrollbars
-		// Too bad :/
+    set_icon(get_icon_for_address(address));
+    $("#status-bar-left-text").empty();
 
-		// We also can't get the title; it's kinda hard to make a web browser like this!
-		// $iframe.on("load", function(){
-		// 	set_title($iframe[0].contentDocument.title + " - Explorer"); // " - Microsoft Internet Explorer"
-		// });
+    if (folder_view) { folder_view.element.remove(); folder_view = null; }
+    if ($iframe) { $iframe.remove(); $iframe = null; }
+    $("#content").empty();
 
-		$("#status-bar-right-icon").attr({
-			src: getIconPath("zone-internet", 16),
-		}).show();
-		$("#status-bar-right-text").text("Internet");
-	} else {
-		const eventHandlers = {}; // @TODO: less hacky event duct tape
-		// (just wanna have multiple listeners, but I gave myself a single-listener API)
-		// (I could just use DOM events on folder_view.element)
-		folder_view = new FolderView(address, {
-			onStatus: ({ items, selectedItems }) => {
-				$("#status-bar-left-text").text(
-					selectedItems.length > 0 ?
-						selectedItems.length + " object(s) selected" :
-						items.length + " object(s)"
-				);
-				eventHandlers.onStatus?.({ items, selectedItems });
-			},
-			onConfigure: async (changes) => {
-				if ("view_as_web_page" in changes) {
-					await render_folder_template(folder_view, address, eventHandlers);
-				}
-			},
-			openFolder: go_to,
-			openFileOrFolder: executeFile,
-		});
-
-		if (
-			address !== "/desktop/" &&
-			address !== "/recycle-bin/" &&
-			address !== "/network-neighborhood/"
-		) {
-			$("#status-bar-right-icon").attr({
-				src: getIconPath("my-computer", 16),
-			}).show();
-			$("#status-bar-right-text").text("My Computer");
-		} else {
-			$("#status-bar-right-icon").hide();
-			$("#status-bar-right-text").text("");
-		}
-
-		await render_folder_template(folder_view, address, eventHandlers);
-	}
-	// console.log("had_focus", had_focus, "$iframe", $iframe, "folder_view", folder_view);
-	// if (had_focus && $iframe) {
-	// 	console.log("refocus iframe");
-	// 	$iframe[0].contentWindow.focus();
-	// 	folder_view?.focus();
-	// }
+    if (is_url) {
+        $iframe = $("<iframe>").attr({
+            src: address,
+            allowfullscreen: "allowfullscreen",
+            sandbox: "allow-same-origin allow-scripts allow-forms allow-pointer-lock allow-modals allow-popups",
+			scrolling: "yes",
+        }).appendTo("#content");
+        enhance_iframe($iframe[0]);
+        $("#status-bar-right-icon").attr({ src: getIconPath("zone-internet", 16) }).show();
+        $("#status-bar-right-text").text("Интернет");
+    } else {
+        const eventHandlers = {};
+        folder_view = new FolderView(address, {
+            onStatus: ({ items, selectedItems }) => {
+                $("#status-bar-left-text").text(selectedItems.length > 0 ? selectedItems.length + " object(s) selected" : items.length + " object(s)");
+                eventHandlers.onStatus?.({ items, selectedItems });
+            },
+            onConfigure: async (changes) => {
+                if ("view_as_web_page" in changes) await render_folder_template(folder_view, address, eventHandlers);
+            },
+            openFolder: go_to,
+            openFileOrFolder: executeFile,
+        });
+        if (address !== "/desktop/" && address !== "/recycle-bin/" && address !== "/network-neighborhood/") {
+            $("#status-bar-right-icon").attr({ src: getIconPath("my-computer", 16) }).show();
+            $("#status-bar-right-text").text("My Computer");
+        } else {
+            $("#status-bar-right-icon").hide();
+            $("#status-bar-right-text").text("");
+        }
+        await render_folder_template(folder_view, address, eventHandlers);
+    }
 };
 
 
@@ -280,10 +267,10 @@ var resolve_address = async function (address) {
 				address = "https://web.archive.org/web/2015-05-05/" + address;
 			// complete exemptions:
 			} else if (
-				!address.match(/^https?:\/\/(www\.)?(copy.sh|topotech.github.io\/interdimensionalcable|isaiahodhner.io|brie.fi\/ng)/) &&
+				!address.match(/^https?:\/\/(www\.)?(copy.sh|vepurovk.xyz|old.myslivets.com|interdimensionalcable|home.saursvepur.xyz|old-web.com|old.tinelix.ru\/ng)/) &&
 				!address.match(/^(file|data|blob):\/\//)
 			) {
-				address = "https://web.archive.org/web/1998/" + address;
+				address = "https://web.archive.org/web/1999/" + address;
 			}
 		}
 		is_url = true;
@@ -388,11 +375,11 @@ async function render_folder_template(folder_view, address, eventHandlers) {
 	let html = htt.replaceAll(percent_var_regexp, (match, file_protocol, path_before, var_name, path_after) => {
 		if (var_name in percent_vars) {
 			return (
-				// drop the file:// protocol (if applicable)
-				(path_before ?? "").replace(/\\/g, "/") +
-				percent_vars[var_name] +
-				(path_after ?? "").replace(/\\/g, "/")
-			);
+                (file_protocol ?? "") +
+                (path_before ?? "").replace(/\\/g, "/") +
+                escapeHtml(percent_vars[var_name]) + 
+                (path_after ?? "").replace(/\\/g, "/")
+            );
 		} else {
 			console.warn("Unknown percent variable:", match);
 			return match;
@@ -775,12 +762,12 @@ ${doc.documentElement.outerHTML}`;
 											// @TODO: DRY, and move file type code/data to one central place
 											const system_folder_path_to_name = {
 												"/": "(C:)", //"My Computer",
-												"/my-pictures/": "My Pictures",
-												"/my-documents/": "My Documents",
-												"/network-neighborhood/": "Network Neighborhood",
-												"/desktop/": "Desktop",
+												"/my-pictures/": "Мои рисунки",
+												"/my-documents/": "Мои документы",
+												"/network-neighborhood/": "Сетевое окружение",
+												"/desktop/": "Рабочий стол",
 												"/programs/": "Program Files",
-												"/recycle-bin/": "Recycle Bin",
+												"/recycle-bin/": "Корзина",
 											};
 											if (system_folder_path_to_name[item._item.file_path]) {
 												return "System Folder";
@@ -827,20 +814,27 @@ ${doc.documentElement.outerHTML}`;
 
 	const head_start_injected_html = `
 		<meta charset="utf-8">
-		<title>Folder Template</title>
-		<link href="/src/ie-6.css" rel="stylesheet" type="text/css">
-		<style>
-		p {margin: 0;}
+    <title>Folder Template</title>
+    <link href="/src/ie-6.css" rel="stylesheet" type="text/css">
+    <style>
+    html, body {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        margin: 0;
+    }
+    
+    p {margin: 0;}
 
-		#Panel {
-			scrollbar-gutter: stable;
-		}
+    #Panel {
+        scrollbar-gutter: stable;
+    }
 
-		body {
-			user-select: none;
-		}
-		</style>
-	`;
+    body {
+        user-select: none;
+    }
+    </style>
+`;
 
 	const head_end_injected_html = `
 		<link href="/layout.css" rel="stylesheet" type="text/css">
@@ -961,7 +955,7 @@ function can_go_up() {
 }
 
 function go_home() {
-	go_to("https://isaiahodhner.io/"); // My personal homepage; I might use a search engine, but they don't support iframes
+	go_to("https://home.saursvepur.xyz"); // мой сайт
 }
 
 function executeFile(file_path) {

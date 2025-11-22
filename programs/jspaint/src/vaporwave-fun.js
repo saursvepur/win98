@@ -64,10 +64,10 @@ import { onKonamiCodeEntered } from "./konami.js";
 		rotologo.classList.add("rotologo");
 		if (frameElement) {
 			frameElement.parentElement.appendChild(rotologo);
-			rotologo.src = "images/logo/98.js.org.svg";
+			rotologo.src = "images/logo/win98.saursvepur.xyz.svg";
 		} else {
 			document.body.appendChild(rotologo);
-			rotologo.src = "images/98.js.org.svg";
+			rotologo.src = "images/win98.saursvepur.xyz.svg";
 		}
 
 		$(rotologo).css({
@@ -100,7 +100,7 @@ import { onKonamiCodeEntered } from "./konami.js";
 					offsetTop += el.offsetTop;
 					// Doing this a little bit messily because I want it to be type-safe,
 					// but I'm not 100% sure this is correct and I don't want to spend too much time on it
-					// To test this, I need to run it in 98.js.org
+					// To test this, I need to run it in win98.saursvepur.xyz
 					if (el.offsetParent instanceof HTMLElement) {
 						el = el.offsetParent;
 					} else {

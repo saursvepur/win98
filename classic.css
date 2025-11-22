@@ -18,9 +18,7 @@
 	font-size: 12px;
 }
 .start-menu-titlebar {
-	/* background-image: url("images/start-menu-side.png"); */
-	/* background-image: url("images/start-menu-side-98-js.png"); */
-	background-image: url("images/start-menu-side-98-js-alt.png");
+	background-image: url("images/start-menu-side.png");
 	background-repeat: no-repeat;
 	background-position: bottom left;
 	background-color: #000080;
@@ -50,6 +48,69 @@
 	/* background: white;
 	padding: 5px;
 	border: inset 1px; */
+}
+.start-menu-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #c0c0c0; 
+    padding: 2px;
+    min-width: 200px;
+}
+
+.start-menu-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2px;
+    height: auto !important;
+    background: #c0c0c0;
+}
+
+.start-item {
+    display: flex;
+    align-items: center;
+    padding: 3px 6px;
+    margin: 0 !important;
+    height: 28px;
+    font-family: "MS Sans Serif", "Segoe UI", sans-serif;
+    font-size: 12px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.start-item:hover {
+    background-color: #000080;
+    color: white;
+}
+.start-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border: none;
+}
+.start-item:hover .arrow { 
+	border-left-color: white;
+}
+
+.start-separator {
+    border-top: 1px solid #808080;
+    border-bottom: 1px solid #ffffff;
+    margin: 4px 2px;
+    height: 0;
+}
+
+.start-item .arrow {
+    margin-left: auto;
+    width: 0; 
+    height: 0; 
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid black;
+}
+
+.start-item:hover .arrow {
+    border-left-color: white;
 }
 .task.selected {
 	font-weight: bold;
@@ -116,14 +177,14 @@
 	mix-blend-mode: exclusion;
 }
 .folder-view .desktop-icon.renaming .title {
-	border: 1px solid var(--ButtonText); /* @TODO: is this the right theme color? */
+	border: 1px solid var(--ButtonText); 
 }
 .desktop-icon .title input {
 	font: inherit;
 	outline: none;
-	border: none; /* using border of the .title */
-	height: 17px; /* @TODO: auto-size */
-	line-height: 13px; /* 17px-4px so the selection highlight doesn't abut the border (height is also important) */
+	border: none;
+	height: 17px;
+	line-height: 13px; 
 	box-sizing: border-box;
 	background: var(--Window);
 	color: var(--WindowText);

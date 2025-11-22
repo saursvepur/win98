@@ -1,12 +1,12 @@
 // @ts-check
 /* global localize */
 
-// Note that this API must be kept in sync with the version in 98.js.org,
-// as 98.js.org will write the global `showMessageBox` to provide integration with the web desktop environment,
+// Note that this API must be kept in sync with the version in win98.saursvepur.xyz,
+// as win98.saursvepur.xyz will write the global `showMessageBox` to provide integration with the web desktop environment,
 // i.e. windows that can go outside the iframe.
 // We also need to accept the injected global `showMessageBox` function if it exists,
-// and set `window.defaultMessageBoxTitle` which is used in 98.js.org to set the default title for message boxes...
-// or, couldn't we just provide the default in a wrapper function, similar to how 98.js.org does it?
+// and set `window.defaultMessageBoxTitle` which is used in win98.saursvepur.xyz to set the default title for message boxes...
+// or, couldn't we just provide the default in a wrapper function, similar to how win98.saursvepur.xyz does it?
 
 import { make_window_supporting_scale } from "./$ToolWindow.js";
 // import { localize } from "./app-localization.js";
@@ -146,10 +146,10 @@ function showMessageBox_implementation({
 
 // Prefer a function injected from outside an iframe,
 // which will make dialogs that can go outside the iframe,
-// for 98.js.org integration.
+// for win98.saursvepur.xyz integration.
 exports.showMessageBox = window.showMessageBox || showMessageBox_implementation;
 
-// Note `defaultMessageBoxTitle` handling in make_iframe_window (or now function enhance_iframe) in 98.js.org
+// Note `defaultMessageBoxTitle` handling in make_iframe_window (or now function enhance_iframe) in win98.saursvepur.xyz
 // https://github.com/1j01/98/blob/361bd759a6d9b71d0fad9e479840598dc0128bb6/src/iframe-windows.js#L111
 // Any other default parameters need to be handled there (as it works now)
 

@@ -68,8 +68,8 @@ function enhance_iframe(iframe) {
 			iframe.contentDocument.body.appendChild(message);
 			message.innerHTML = `<a target="_blank">Save this url in the Wayback Machine</a>`;
 			message.querySelector("a").href =
-				"https://web.archive.org/save/https://98.js.org/" +
-				iframe.src.replace(/.*https:\/\/98.js.org\/?/, "");
+				"https://web.archive.org/save/https://win98.saursvepur.xyz/" +
+				iframe.src.replace(/.*https:\/\/win98.saursvepur.xyz\/?/, "");
 			message.querySelector("a").style.color = "blue";
 		}
 
