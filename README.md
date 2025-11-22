@@ -1,23 +1,39 @@
 # [**win98.saursvepur.xyz**](https://www.google.com/search?q=/https://win98.saursvepur.xyz)
 
-Веб-симулятор рабочего стола Windows 98\.  
-**Примечание:** Этот проект ([https://github.com/saursvepur/win98](https://github.com/saursvepur/win98) и [win98.saursvepur.xyz](https://win98.saursvepur.xyz)) является форком оригинального репозитория [https://github.com/1j01/98](https://github.com/1j01/98) и сайта [https://98.js.org](https://98.js.org) от автора Исайя Однер (https://isaiahodhner.io/) .  
+Веб-симулятор рабочего стола Windows 98\.
+
+**Примечание:** Этот проект ([win98 на GitHub](https://github.com/saursvepur/win98) и [win98 на сайте](https://win98.saursvepur.xyz)) является форком оригинального репозитория ([98js](https://github.com/1j01/98)) и сайта ([98.js.org](https://98.js.org)) от автора [Исайя Однер](https://isaiahodhner.io/)
 
 Включает в себя:
 
-* Блокнот ([отдельный README](https://www.google.com/search?q=programs/notepad/README.md))  
-* Звукозапись ([отдельный README](https://www.google.com/search?q=programs/sound-recorder/README.md))  
-* Paint ([отдельный репозиторий](https://github.com/1j01/jspaint))  
-* Калькулятор ([отдельный README](https://www.google.com/search?q=programs/calculator/README.md))  
-* 3D Трубы ([отдельный репозиторий](https://github.com/1j01/pipes))  
-* 3D FlowerBox ([оригинальный репозиторий](https://github.com/kevin-shannon/3D-FlowerBox)) от [Kevin Shannon](https://github.com/kevin-shannon)  
-* Сапер ([отдельный README](https://www.google.com/search?q=programs/minesweeper/README.md); [оригинальный репозиторий](https://github.com/ziebelje/minesweeper)) от [Jon Ziebell](https://github.com/ziebelje/)  
-* Пасьянс ([оригинальный репозиторий](https://github.com/rjanjic/js-solitaire)) от [Radovan Janjic](https://github.com/rjanjic)  
-* Пинбол ([оригинальный репозиторий](https://github.com/alula/SpaceCadetPinball)) портирован [Muzychenko Andrey](https://github.com/k4zmu2a) и [Alula](https://github.com/alula)  
-* Winamp 2.9 + 1 500 композиций ([отдельный README](https://www.google.com/search?q=programs/winamp/README.md); [оригинальный репозиторий](https://github.com/captbaritone/webamp)) от [Jordan Eldredge](https://jordaneldredge.com/)  
-* Проводник Windows / Internet Explorer ([отдельный README](https://www.google.com/search?q=programs/explorer/README.md))  
-* Просмотр справки  
-* 📎 Помощник (Clippy) ([оригинальный репозиторий](https://github.com/smore-inc/clippy.js))
+Включает:
+
+* ![](images/icons/notepad-16x16.png) **Блокнот** ([отдельное README](programs/notepad/README.md))
+
+* ![](images/icons/speaker-16x16.png) **Звуковой рекордер** ([отдельное README](programs/sound-recorder/README.md))
+
+* ![](images/icons/paint-16x16.png) **Paint** ([отдельный репозиторий](https://github.com/1j01/jspaint))
+
+* ![](images/icons/calculator-16x16.png) **Калькулятор** ([отдельное README](programs/calculator/README.md))
+
+* ![](images/icons/pipes-16x16.png) **3D Pipes** ([отдельный репозиторий](https://github.com/1j01/pipes))
+
+* ![](images/icons/pipes-16x16.png) **3D FlowerBox** ([оригинальный репозиторий](https://github.com/kevin-shannon/3D-FlowerBox)) от [Кевина Шеннона](https://github.com/kevin-shannon)
+
+* ![](images/icons/minesweeper-16x16.png) **Сапёр** ([отдельное README](programs/minesweeper/README.md); [оригинальный репозиторий](https://github.com/ziebelje/minesweeper)) от [Джона Зибелла](https://github.com/ziebelje/)
+
+* ![](images/icons/solitaire-16x16.png) **Солитёр** ([оригинальный репозиторий](https://github.com/rjanjic/js-solitaire)) от [Радована Янжича](https://github.com/rjanjic)
+
+* ![](images/icons/pinball-16x16.png) **Пинбол** ([оригинальный репозиторий](https://github.com/alula/SpaceCadetPinball)) портирован [Музыченко Андреем](https://github.com/k4zmu2a) и [Алула](https://github.com/alula)
+
+* ![](images/icons/winamp2-16x16.png) **Winamp 2.9 + 1 500 композиций** ([отдельное README](programs/winamp/README.md); [оригинальный репозиторий](https://github.com/captbaritone/webamp)) от [Джордана Элдриджа](https://jordaneldredge.com/)
+
+* ![](images/icons/folder-open-16x16.png) **Проводник Windows** / ![](images/icons/internet-explorer-16x16.png) **Internet Explorer** ([отдельное README](programs/explorer/README.md))
+
+* ![](images/icons/chm-16x16.png) **Cправки**
+
+* 📎 **Clippy** ([оригинальный репозиторий](https://github.com/smore-inc/clippy.js))
+
 
 Особенности:
 
