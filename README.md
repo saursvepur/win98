@@ -89,19 +89,19 @@ awesome-web-desktops,
    * [Node.js](https://nodejs.org/)  
 2. Клонируйте репозиторий:  
    Откройте терминал и выполните команду:  
-   git clone \[https://github.com/saursvepur/win98.git\](https://github.com/saursvepur/win98.git)  
-   cd win98
+  `git clone https://github.com/saursvepur/win98.git`
+   `cd win98`
 
 3. Установите зависимости:  
    В папке проекта выполните:  
-   npm install
+   `npm install`
 
 4. Установите BrowserFS (специальная версия):  
    Для корректной работы требуется определенная версия BrowserFS глобально:  
-   npm i \-g browserfs@2.0.0
+   `npm i \-g browserfs@2.0.0`
 
 5. **Запустите сервер:**  
-   npm start
+   `npm start`
 
    После этого откроется локальный сервер с поддержкой live-reloading.
 
